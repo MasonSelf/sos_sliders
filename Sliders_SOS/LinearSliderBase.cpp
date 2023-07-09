@@ -5,8 +5,8 @@
 #pragma once
 #include "LinearSliderBase.h"
 
-SOSLinearSliderBase::SOSLinearSliderBase(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, juce::Colour _trackColor, juce::Colour _fillColor, juce::Colour _handleColor)
-: audioProcessor(p), trackColor(_trackColor), trackFillColor(_fillColor), handleColor(_handleColor)
+SOSLinearSliderBase::SOSLinearSliderBase(IAudioProcessor &p, const juce::Identifier &paramID, int paramIndex)
+        : audioProcessor(p)
 {
     sliderAttachment =
             std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>
@@ -18,3 +18,18 @@ SOSLinearSliderBase::SOSLinearSliderBase(IAudioProcessor& p, const juce::Identif
     setValue((*param)->get());
     setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
 }
+
+SOSLinearSliderBase::SOSLinearSliderBase(IAudioProcessor& p,
+                                         const juce::Identifier& paramID ,
+                                         int paramIndex,
+                                         juce::Colour _trackColor,
+                                         juce::Colour _fillColor,
+                                         juce::Colour _handleColor)
+: SOSLinearSliderBase(p, paramID, paramIndex)
+{
+    trackColor = _trackColor;
+    trackFillColor = _fillColor;
+    handleColor = _handleColor;
+}
+
+

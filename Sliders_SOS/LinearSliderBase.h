@@ -16,10 +16,21 @@
 class SOSLinearSliderBase : public juce::Slider
 {
 public:
-    SOSLinearSliderBase(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, juce::Colour _trackColor, juce::Colour _fillColor, juce::Colour _handleColor);
+    //constructor without color choices
+    SOSLinearSliderBase(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex);
+
+    //constructor with color choices
+    SOSLinearSliderBase(IAudioProcessor& p,
+                        const juce::Identifier& paramID ,
+                        int paramIndex,
+                        juce::Colour _trackColor,
+                        juce::Colour _fillColor,
+                        juce::Colour _handleColor);
 
     IAudioProcessor& audioProcessor;
-    juce::Colour trackColor, trackFillColor, handleColor;
+    juce::Colour trackColor {juce::Colours::grey};
+    juce::Colour trackFillColor {juce::Colours::pink};
+    juce::Colour handleColor {juce::Colours::yellow};
     juce::Rectangle<float> handleRectangle {4.0f, 10.0f};
     const float trackWidth {4.0f};
     const float amountRounded {3.0f};

@@ -4,7 +4,18 @@
 
 #include "LinearSliderVertical.h"
 
-SOSSliderVertical::SOSSliderVertical(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, juce::Colour _trackColor, juce::Colour _fillColor, juce::Colour _handleColor)
+SOSSliderVertical::SOSSliderVertical(IAudioProcessor& p, const juce::Identifier& paramID, int paramIndex)
+: SOSLinearSliderBase(p, paramID, paramIndex)
+{
+    setSliderStyle(juce::Slider::LinearVertical);
+}
+
+SOSSliderVertical::SOSSliderVertical(IAudioProcessor& p,
+                                     const juce::Identifier& paramID,
+                                     int paramIndex,
+                                     juce::Colour _trackColor,
+                                     juce::Colour _fillColor,
+                                     juce::Colour _handleColor)
 : SOSLinearSliderBase(p, paramID, paramIndex, _trackColor, _fillColor, _handleColor)
 {
     handleRectangle = {50.0f, 8.0f};

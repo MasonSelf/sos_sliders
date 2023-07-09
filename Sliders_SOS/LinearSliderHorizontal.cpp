@@ -4,7 +4,17 @@
 
 #include "LinearSliderHorizontal.h"
 
-SOSSliderHorizontal::SOSSliderHorizontal(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, juce::Colour _trackColor, juce::Colour _fillColor, juce::Colour _handleColor)
+SOSSliderHorizontal::SOSSliderHorizontal(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex)
+: SOSLinearSliderBase(p, paramID, paramIndex)
+{
+}
+
+SOSSliderHorizontal::SOSSliderHorizontal(IAudioProcessor& p,
+                                         const juce::Identifier& paramID ,
+                                         int paramIndex,
+                                         juce::Colour _trackColor,
+                                         juce::Colour _fillColor,
+                                         juce::Colour _handleColor)
 : SOSLinearSliderBase(p, paramID, paramIndex, _trackColor, _fillColor, _handleColor)
 {
 }

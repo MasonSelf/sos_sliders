@@ -14,7 +14,16 @@
 class SOSSliderVertical : public SOSLinearSliderBase
 {
 public:
-    SOSSliderVertical(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, juce::Colour _trackColor, juce::Colour _fillColor, juce::Colour _handleColor);
+    //constructor without color choices
+    SOSSliderVertical(IAudioProcessor& p, const juce::Identifier& paramID, int paramIndex);
+
+    //constructor with color choices
+    SOSSliderVertical(IAudioProcessor& p,
+                      const juce::Identifier& paramID ,
+                      int paramIndex,
+                      juce::Colour _trackColor,
+                      juce::Colour _fillColor,
+                      juce::Colour _handleColor);
     void paint(juce::Graphics& g) override;
     
     float GetHandlePosition(float trackHeight);
