@@ -15,7 +15,7 @@
 class SOSRotarySliderLookAndFeel : public juce::LookAndFeel_V4
 {
 public:
-    SOSRotarySliderLookAndFeel(juce::Colour& _fill, juce::Colour& _outline, juce::Colour& _pointer)
+    SOSRotarySliderLookAndFeel(juce::Colour _fill, juce::Colour _outline, juce::Colour _pointer)
     : fillColor(_fill), outlineColor(_outline), pointerColor(_pointer)
     {
     }
@@ -101,7 +101,7 @@ public:
     }
     
 private:
-    juce::Colour& fillColor;
-    juce::Colour& outlineColor;
-    juce::Colour& pointerColor;
+    juce::Colour fillColor;
+    juce::Colour outlineColor;
+    juce::Colour pointerColor;
 };

@@ -5,14 +5,14 @@
 #pragma once
 #include "RotarySliderChoice.h"
 
-SOSRotaryChoiceSlider::SOSRotaryChoiceSlider(IAudioProcessor& p, const juce::Identifier& paramID ,int paramIndex, juce::Colour& _fill, juce::Colour& _outline, juce::Colour& _pointer)
+SOSRotaryChoiceSlider::SOSRotaryChoiceSlider(IAudioProcessor& p, const juce::Identifier& paramID ,int paramIndex, juce::Colour _fill, juce::Colour _outline, juce::Colour _pointer)
 : audioProcessor(p), feel(_fill, _outline, _pointer)
 {
     sliderAttachment =
             std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>
                     (audioProcessor.GetAPVTS(), paramID.toString(), *this);
 
-    auto param = std::make_unique<juce::AudioParameterChoice*>(static_cast<juce::AudioParameterChoice*>(audioProcessor.GetParams().getUnchecked(paramIndex)));
+    auto param = std::make_unique<juce::AudioParameterChoice*>(dynamic_cast<juce::AudioParameterChoice*>(audioProcessor.GetParams().getUnchecked(paramIndex)));
 
     setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     setLookAndFeel(&feel);
@@ -27,3 +27,5 @@ SOSRotaryChoiceSlider::~SOSRotaryChoiceSlider()
 {
     setLookAndFeel(nullptr);
 }
+
+

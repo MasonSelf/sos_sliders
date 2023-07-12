@@ -10,7 +10,7 @@
 
 #pragma once
 #include "RotarySliderLookAndFeel.h"
-#include "IAudioProcessor.h"
+#include <sos_IAudioProcessor/sos_IAudioProcessor.h>
 #include <juce_audio_processors/juce_audio_processors.h>
 
 
@@ -18,7 +18,7 @@
 class SOSRotaryFloatSlider : public juce::Slider
 {
 public:
-    SOSRotaryFloatSlider(IAudioProcessor& p, const juce::Identifier& paramID ,int paramIndex, juce::Colour& _fill, juce::Colour& _outline, juce::Colour& _pointer, const juce::String& suffix);
+    SOSRotaryFloatSlider(IAudioProcessor& p, const juce::Identifier& paramID ,int paramIndex, juce::Colour _fill, juce::Colour _outline, juce::Colour _pointer, const juce::String& suffix);
     ~SOSRotaryFloatSlider();
 
     IAudioProcessor& audioProcessor;

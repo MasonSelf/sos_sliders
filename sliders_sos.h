@@ -10,7 +10,7 @@ BEGIN_JUCE_MODULE_DECLARATION
       name:             sliders_sos
       description:      SlidersSynthsOfSelf
       license:          GPL/Commercial
-      dependencies:     juce_audio_utils, juce_gui_basics, juce_audio_processors
+      dependencies:     juce_audio_utils, juce_gui_basics, sos_IAudioProcessor
 
      END_JUCE_MODULE_DECLARATION
 
