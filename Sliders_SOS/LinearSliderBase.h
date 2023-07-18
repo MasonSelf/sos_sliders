@@ -29,8 +29,8 @@ public:
 
     IAudioProcessor& audioProcessor;
     juce::Colour trackColor {juce::Colours::grey};
-    juce::Colour trackFillColor {juce::Colours::pink};
-    juce::Colour handleColor {juce::Colours::yellow};
+    juce::Colour trackFillColor {juce::Colours::black};
+    juce::Colour handleColor {juce::Colours::black};
     juce::Rectangle<float> handleRectangle {4.0f, 10.0f};
     const float trackWidth {4.0f};
     const float amountRounded {3.0f};

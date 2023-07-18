@@ -26,4 +26,5 @@ public:
                         juce::Colour _handleColor);
     void paint(juce::Graphics& g) override;
     float GetHandlePosition();
+
 };

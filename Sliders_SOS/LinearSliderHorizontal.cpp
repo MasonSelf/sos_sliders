@@ -22,10 +22,10 @@ SOSSliderHorizontal::SOSSliderHorizontal(IAudioProcessor& p,
 
 void SOSSliderHorizontal::paint(juce::Graphics& g)
 {
-    juce::Point<float> trackTopLeft {0.0f, getHeight() / 2.0f - trackWidth / 2.0f};
-    juce::Point<float> trackBottomRight {static_cast<float>(getWidth()), getHeight() / 2.0f + trackWidth / 2.0f};
+
+    //g.fillAll(juce::Colours::black);
     //track
-    juce::Rectangle<float> trackRectangle {trackTopLeft, trackBottomRight};
+    juce::Rectangle<float> trackRectangle {0.0f, static_cast<float>(getHeight()) / 2.0f - trackWidth / 2.0f, static_cast<float>(getWidth()), trackWidth};
     g.setColour(trackColor);
     g.setOpacity(0.8f);
     g.fillRoundedRectangle(trackRectangle, amountRounded);
