@@ -18,12 +18,13 @@ SOSRotaryFloatSlider::SOSRotaryFloatSlider(IAudioProcessor& p, const juce::Ident
     setRange((*param)->range.start, (*param)->range.end, 0.00001);
     setValue((*param)->get());
     setTextBoxStyle(juce::Slider::TextBoxBelow, false, 200, 20);
+
     setColour(juce::Slider::ColourIds::textBoxTextColourId, juce::Colours::black);
     setColour(juce::Slider::ColourIds::textBoxOutlineColourId, juce::Colours::transparentBlack);
     setTextValueSuffix(suffix);
-    setNumDecimalPlacesToDisplay(1);
 }
 SOSRotaryFloatSlider::~SOSRotaryFloatSlider()
 {
     setLookAndFeel(nullptr);
 }
+

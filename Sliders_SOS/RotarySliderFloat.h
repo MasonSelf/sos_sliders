@@ -20,7 +20,6 @@ class SOSRotaryFloatSlider : public juce::Slider
 public:
     SOSRotaryFloatSlider(IAudioProcessor& p, const juce::Identifier& paramID ,int paramIndex, juce::Colour _fill, juce::Colour _outline, juce::Colour _pointer, const juce::String& suffix);
     ~SOSRotaryFloatSlider();
-
     IAudioProcessor& audioProcessor;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachment;
     
