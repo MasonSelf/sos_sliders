@@ -4,7 +4,7 @@
 
 BEGIN_JUCE_MODULE_DECLARATION
 
-      ID:               SlidersSynthsOfSelf
+      ID:               sliders_sos
       vendor:           Mason Self
       version:          0.0.1
       name:             sliders_sos
@@ -22,3 +22,4 @@ BEGIN_JUCE_MODULE_DECLARATION
 #include "Sliders_SOS/RotarySliderChoice.h"
 #include "Sliders_SOS/RotarySliderFloat.h"
 #include "Sliders_SOS/RotarySliderLookAndFeel.h"
+#include "Sliders_SOS/LinearSliderDragFillBox.h"

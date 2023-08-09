@@ -5,3 +5,4 @@
 #include "Sliders_SOS/LinearSliderVertical.cpp"
 #include "Sliders_SOS/RotarySliderChoice.cpp"
 #include "Sliders_SOS/RotarySliderFloat.cpp"
+#include "Sliders_SOS/LinearSliderDragFillBox.cpp"
