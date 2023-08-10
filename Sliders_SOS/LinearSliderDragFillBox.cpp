@@ -4,51 +4,54 @@
 
 #include "LinearSliderHorizontal.h"
 
-SOSSliderHorizontal::SOSSliderHorizontal(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex)
-: SOSLinearSliderBase(p, paramID, paramIndex)
+DragFillLabelLayer::DragFillLabelLayer(const juce::String& componentName, const juce::String& labelText, juce::Colour _backgroundColor, juce::Colour _textColor, juce::Colour _borderColor, float _textSize, int _fullWidth)
+: juce::Label(componentName, labelText), backgroundColor(_backgroundColor), textColor(_textColor), borderColor(_borderColor), textSize(_textSize), fullWidth(_fullWidth)
 {
+    setInterceptsMouseClicks(false, false);
 }
 
-SOSSliderHorizontal::SOSSliderHorizontal(IAudioProcessor& p,
-                                         const juce::Identifier& paramID ,
-                                         int paramIndex,
-                                         juce::Colour _trackColor,
-                                         juce::Colour _fillColor,
-                                         juce::Colour _handleColor)
-: SOSLinearSliderBase(p, paramID, paramIndex, _trackColor, _fillColor, _handleColor)
+void DragFillLabelLayer::paint(juce::Graphics& g)
 {
+    g.setColour(backgroundColor);
+    g.fillAll();
+    g.setColour(borderColor);
+    g.drawRect(0, 0, fullWidth, getHeight());
+    g.setColour(textColor);
+    g.setFont(textSize);
+    g.drawText(getText(), 0, 0, fullWidth, getHeight(), juce::Justification::centred, 1);
 }
 
 
-void SOSSliderHorizontal::paint(juce::Graphics& g)
+SOSDragFillBox::SOSDragFillBox(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, const juce::String& name, juce::Colour emptyColor, juce::Colour fullColor, juce::Colour textColor, juce::Colour borderColor, float textSize, int fullComponentWidth)
+: SOSLinearSliderBase(p, paramID, paramIndex),
+  emptyLabel("empty label", name, emptyColor, textColor.interpolatedWith(fullColor, 0.35f), borderColor, textSize, fullComponentWidth),
+  fillLabel("full label", name, fullColor, textColor, borderColor, textSize, fullComponentWidth)
 {
-
-    //g.fillAll(juce::Colours::black);
-    //track
-    juce::Rectangle<float> trackRectangle {0.0f, static_cast<float>(getHeight()) / 2.0f - trackWidth / 2.0f, static_cast<float>(getWidth()), trackWidth};
-    g.setColour(trackColor);
-    g.setOpacity(0.8f);
-    g.fillRoundedRectangle(trackRectangle, amountRounded);
-
-    //track fill
-    auto handleX = GetHandlePosition();
-    auto trackFillRectangle = trackRectangle.withRight(handleX + handleRectangle.getWidth() / 2.0f);
-    g.setColour(trackFillColor);
-    g.setOpacity(0.8f);
-
-    g.fillRoundedRectangle(trackFillRectangle, amountRounded);
-
-    //handle
-    g.setColour(handleColor);
-
-    handleRectangle.setX(handleX);
-    handleRectangle.setY(trackRectangle.getCentre().y - handleRectangle.getHeight() / 2);
-    g.fillRect(handleRectangle);
+    
+    setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    addListener(this);
+    addAndMakeVisible(emptyLabel);
+    addAndMakeVisible(fillLabel);
+    //setInterceptsMouseClicks(true, false);
 }
 
-float SOSSliderHorizontal::GetHandlePosition()
+SOSDragFillBox::~SOSDragFillBox()
 {
-    auto multiplier = (static_cast<float>(getWidth()) - handleRectangle.getWidth()) / static_cast<float>(getWidth());
-    auto normalizedValue = static_cast<float>(getValue()) / getRange().getEnd();
-    return normalizedValue * getWidth() * multiplier;
+    removeListener(this);
+}
+
+void SOSDragFillBox::resized()
+{
+    emptyLabel.setBounds(0, 0, getWidth(), getHeight());
+    ResizeFillLabel();
+}
+
+void SOSDragFillBox::sliderValueChanged(juce::Slider*)
+{
+    ResizeFillLabel();
+}
+
+void SOSDragFillBox::ResizeFillLabel()
+{
+    fillLabel.setBounds(0, 0, static_cast<int>(getValue() * static_cast<float>(getWidth())), getHeight());
 }
