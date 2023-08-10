@@ -22,10 +22,11 @@ void DragFillLabelLayer::paint(juce::Graphics& g)
 }
 
 
-SOSDragFillBox::SOSDragFillBox(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, const juce::String& name, juce::Colour emptyColor, juce::Colour fullColor, juce::Colour textColor, juce::Colour borderColor, float textSize, int fullComponentWidth)
+SOSDragFillBox::SOSDragFillBox(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, const juce::String& name, juce::Colour emptyColor, juce::Colour fullColor, juce::Colour textColor, juce::Colour borderColor, float textSize, int fullComponentWidth, bool _shouldAnnotateText, const juce::String& _annotationText, float _annotationThreshold)
 : SOSLinearSliderBase(p, paramID, paramIndex),
   emptyLabel("empty label", name, emptyColor, textColor.interpolatedWith(fullColor, 0.35f), borderColor, textSize, fullComponentWidth),
-  fillLabel("full label", name, fullColor, textColor, borderColor, textSize, fullComponentWidth)
+  fillLabel("full label", name, fullColor, textColor, borderColor, textSize, fullComponentWidth),
+  shouldAnnotateText(_shouldAnnotateText), annotationText(_annotationText), annotationThreshold(_annotationThreshold)
 {
     
     setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
@@ -48,6 +49,22 @@ void SOSDragFillBox::resized()
 
 void SOSDragFillBox::sliderValueChanged(juce::Slider*)
 {
+    if (shouldAnnotateText)
+    {
+        if (getValue() > annotationThreshold && ! isCurrentlyDisplayingAnnotation)
+        {
+            emptyLabel.setText(emptyLabel.getText() + annotationText, juce::sendNotification);
+            fillLabel.setText(fillLabel.getText() + annotationText, juce::sendNotification);
+            isCurrentlyDisplayingAnnotation = true;
+        }
+        else if (getValue() < annotationThreshold && isCurrentlyDisplayingAnnotation)
+        {
+            emptyLabel.setText(emptyLabel.getText().dropLastCharacters(annotationText.length()), juce::sendNotification);
+            fillLabel.setText(fillLabel.getText().dropLastCharacters(annotationText.length()), juce::sendNotification);
+            isCurrentlyDisplayingAnnotation = false;
+       
+        }
+    }
     ResizeFillLabel();
 }
 

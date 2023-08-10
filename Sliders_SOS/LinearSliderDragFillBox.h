@@ -28,7 +28,7 @@ private:
 class SOSDragFillBox : public SOSLinearSliderBase, juce::Slider::Listener
 {
 public:
-    SOSDragFillBox(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, const juce::String& name, juce::Colour emptyColor, juce::Colour fullColor, juce::Colour textColor, juce::Colour borderColor, float textSize, int fullComponentWidth);
+    SOSDragFillBox(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, const juce::String& name, juce::Colour emptyColor, juce::Colour fullColor, juce::Colour textColor, juce::Colour borderColor, float textSize, int fullComponentWidth, bool _shouldAnnotateText, const juce::String& _annotationText = juce::String(), float _annotationThreshold = 0.0f);
     ~SOSDragFillBox();
 
     void resized() override;
@@ -39,4 +39,8 @@ private:
     
     DragFillLabelLayer emptyLabel;
     DragFillLabelLayer fillLabel;
+    const bool shouldAnnotateText;
+    bool isCurrentlyDisplayingAnnotation {false};
+    const juce::String annotationText;
+    const float annotationThreshold;
 };
