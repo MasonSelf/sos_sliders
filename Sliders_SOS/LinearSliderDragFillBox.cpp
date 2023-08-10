@@ -24,7 +24,7 @@ void DragFillLabelLayer::paint(juce::Graphics& g)
 
 SOSDragFillBox::SOSDragFillBox(IAudioProcessor& p, const juce::Identifier& paramID , int paramIndex, const juce::String& name, juce::Colour emptyColor, juce::Colour fullColor, juce::Colour textColor, juce::Colour borderColor, float textSize, int fullComponentWidth, bool _shouldAnnotateText, const juce::String& _annotationText, float _annotationThreshold)
 : SOSLinearSliderBase(p, paramID, paramIndex),
-  emptyLabel("empty label", name, emptyColor, textColor.interpolatedWith(fullColor, 0.35f), borderColor, textSize, fullComponentWidth),
+  emptyLabel("empty label", name, emptyColor, textColor.interpolatedWith(emptyColor, 0.4f), borderColor, textSize, fullComponentWidth),
   fillLabel("full label", name, fullColor, textColor, borderColor, textSize, fullComponentWidth),
   shouldAnnotateText(_shouldAnnotateText), annotationText(_annotationText), annotationThreshold(_annotationThreshold)
 {
