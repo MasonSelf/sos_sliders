@@ -14,7 +14,6 @@
 #include <juce_audio_processors/juce_audio_processors.h>
 
 
-
 class SOSRotaryFloatSlider : public juce::Slider
 {
 public:
