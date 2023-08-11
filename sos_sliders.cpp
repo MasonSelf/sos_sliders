@@ -1,4 +1,4 @@
-#include "sliders_sos.h"
+#include "sos_sliders.h"
 
 #include "Sliders_SOS/LinearSliderBase.cpp"
 #include "Sliders_SOS/LinearSliderHorizontal.cpp"

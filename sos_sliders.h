@@ -4,10 +4,10 @@
 
 BEGIN_JUCE_MODULE_DECLARATION
 
-      ID:               sliders_sos
+      ID:               sos_sliders
       vendor:           Mason Self
       version:          0.0.1
-      name:             sliders_sos
+      name:             sos_sliders
       description:      SlidersSynthsOfSelf
       license:          GPL/Commercial
       dependencies:     juce_audio_utils, juce_gui_basics, sos_IAudioProcessor
