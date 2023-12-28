@@ -105,3 +105,38 @@ private:
     juce::Colour outlineColor;
     juce::Colour pointerColor;
 };
+
+
+class SOSRotaryImageSliderLookAndFeel : public juce::LookAndFeel_V4
+{
+public:
+    SOSRotaryImageSliderLookAndFeel(const void* imageData, const int dataSize)
+    {
+        image = juce::ImageCache::getFromMemory(imageData, dataSize);
+    }
+    
+    void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider&) override
+    {
+        auto radius = (float) juce::jmin (width / 2, height / 2) - 4.0f;
+        auto centreX = (float) x + (float) width  * 0.5f;
+        auto centreY = (float) y + (float) height * 0.5f;
+//        auto rx = centreX - radius;
+//        auto ry = centreY - radius;
+//        auto rw = radius * 2.0f;
+        auto angle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
+        
+        juce::AffineTransform transform;
+        transform = transform.scaled(width / 1000.0f, width / 1000.0f).rotated(angle, width / 2.0f, width / 2.0f);
+        
+        g.drawImageTransformed(image, transform);
+        //g.drawImageWithin(image, x, y, width, height, juce::RectanglePlacement::stretchToFit);
+//        juce::Path p;
+//        auto pointerLength = radius * 0.33f;
+//        auto pointerThickness = 2.0f;
+//        p.addRectangle (-pointerThickness * 0.5f, -radius, pointerThickness, pointerLength);
+//        p.applyTransform (juce::AffineTransform::rotation (angle).translated (centreX, centreY));
+    }
+
+private:
+    juce::Image image;
+};
